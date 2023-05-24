@@ -1,0 +1,10 @@
+db:
+  host: 'localhost'
+  username: "postgres"
+  password: 1234
+  synchronize: true
+  #tru로 되어있으면 entity(모델 같은 느낌)가 실행 될때마다 새롭게 entity를 보고 실행된다
+  #개발환경에서는 true지면 운영환경에서는 db날라갈수도있으니 false로 한다
+
+jwt:
+ secret: "Secret1234"

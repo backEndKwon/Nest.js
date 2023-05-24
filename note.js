@@ -60,4 +60,26 @@ Interceptors - 응답 매핑 및 캐시관리와 함께 요청 로깅과 같은 
 >>>req.user로 user객체를 얻는 방법이 아닌 바로 user라는 파라미터로 가져올 방법은? 커스텀 데코레이터 이용
 굳이 안쓰고 req로 받아도됨
 
+>>>로그에 대해서
+로그종류
+Log = 중요한 정보의 범용 로깅
+Warning = 치명적이거나 파괴적이지 않은 처리되지 않은 문제
+Error - 치명적이거나 파괴적인 처리되지 않은 문제
+Debug - 오류 발생시 로직을 디버그하는데 도움이 되는 유용한 정보(개발자용)
+Verbose - 응용 프로그램의 동작에 대한 통찰력을 제공하는 정보(운영자용)
+
+실제로는 하나하나개발하면서 다 로그를 한다.
+express 에서는 winston이란 모듈을 주로 사용
+nest에서는 빌트인된 logger클래스가 있음
+
+>>>configuration설정이란?
+codebase =노출되도 됨
+environment variables(환경변수) = api키 같은것
+설치모듈
+npm install -g win-node-env
+npm install config --save
+
+
+
+
 */

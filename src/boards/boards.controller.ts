@@ -19,13 +19,17 @@ import { Board } from './board.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
+import { Logger } from '@nestjs/common';//누가 전체게시물 조회했는데 log남기게 해줌
+
 @Controller('boards')
 @UseGuards(AuthGuard()) //이렇게만 해도 밑에 있는 것들 다 영향을 받게됨(사용자인증 미들웨어라고 보면된다)
 export class BoardsController {
+  private logger = new Logger(`BoardsController`);//누가 전체게시물 조회했는데 log남기게 해줌
   constructor(private boardsService: BoardsService) {}
 
   @Get()
-  getAllBoards(): Promise<Board[]> {
+  getAllBoards(@GetUser() user: User): Promise<Board[]> {
+    this.logger.verbose(`User ${user.username}trying to get all boards`);//누가 전체게시물 조회했는데 log남기게 해줌
     return this.boardsService.getAllBoards();
   }
 
@@ -41,10 +45,13 @@ export class BoardsController {
   // }
   @Post()
   @UsePipes(ValidationPipe)
-  createBoard(@Body() CreateBoardDto: CreateBoardDto): Promise<Board> {
+  createBoard(@Body() CreateBoardDto: CreateBoardDto,
+  @GetUser() user:User): Promise<Board> {
     //CreateBoardDto 객체를 매개변수로 받으며, body데코레이터를 통해 post에서 parsing해온 body객체를 가르킨다
     //메소드의 반환값은 Promise<Board> 타입
     //새로운 객체를 생성해서 비동기적으로 처리해주기(비동기쪽이 요청이 완료된 후에 결과를 반환하므로 프로그램 실행흐름관리가 쉬워진다.)
+    this.logger.verbose(`User ${user.username} creating a new boards. Payload:${JSON.stringify(CreateBoardDto)}`);//누가 전체게시물 조회했는데 log남기게 해줌
+
     return this.boardsService.createBoard(CreateBoardDto);
   }
 
