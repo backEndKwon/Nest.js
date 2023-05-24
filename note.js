@@ -22,5 +22,18 @@ async/await 구문은 promise 객체를 사용하지만, 내부적으로 비동�
 리무브 : 무조건 존재하는 아이템을 지운다. 없다면 에러발생
 딜리트 : 없어도 이상없음
 
+>>>auth모듈만들기
+nest g module auth
+nest g controller auth --no-spec
+nest g service auth --no-spec
+
+>>>bcrypt (비크립트)
+비밀번호 암호화해서 저장하기 
+npm install bcryptjs --save
+hash방식보다는 salt방식이 안전하다
+왜? 서로다른 유저a,b의 비밀번호가 1234라면
+유저a=1234 => hash에서는 zbcd123 / salt에서는 zxcv12399
+유저b=1234 => hash에서는 zbcd123 / salt에서는 zxcv123100과 같이 달라짐
+
 
 */
