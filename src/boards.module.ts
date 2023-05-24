@@ -16,7 +16,7 @@ import { Board } from './board.entity';
       database:"board-app",
       entities : [__dirname +'/../**/*.entity.{js,ts}'],
       synchronize : true
-    }),TypeOrmModule.forFeature([BoardRepository])],
+    }),TypeOrmModule.forFeature([Board])],
   controllers: [BoardsController],
   providers: [BoardsService, BoardRepository],
 })
