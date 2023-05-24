@@ -35,5 +35,29 @@ hash방식보다는 salt방식이 안전하다
 유저a=1234 => hash에서는 zbcd123 / salt에서는 zxcv12399
 유저b=1234 => hash에서는 zbcd123 / salt에서는 zxcv123100과 같이 달라짐
 
+>>>jwt
+모듈설치
+npm install @nestjs/jwt @nestjs/passport passport passport-jwt --save
+npm install @types/passport-jwt --save
+구조 = header.payload.verifySignature
+header : 타입,알고리즘 방식
+payload : 발급날짜 및 유저 정보, 만료시간 등 
+verify : header와 payload만드는 방식+ 시크릿text
+
+해당 토큰으로 유저인지 아닌지 비교 => 
+클라이언트에서온 header, payloade, 서버에서 가지고 있는 secret Text를 비교
+
+>>>passport
+
+>>>middleware nestjs에는 여러가지 미들웨어가 있는데 그중 4개
+Pipes - 유효성검사 및 페이로드 변환을 위해 //유효성 체크, 데이터 변환해주는 요청을 보낼때 요청이 컨트롤러에 도달하기 전에 클라이언트에서 보낸값들을 정수면 정수로 변환해주는)
+Filters - 오류처리 미들웨어
+Guards - 인증미들웨어(사용자인증 같은거)
+Interceptors - 응답 매핑 및 캐시관리와 함께 요청 로깅과 같은 전후 미들웨어
+각각의 미들웨어가 불러지는 순서
+미들웨어 > 가드 > 인터셉터 > 파이프 > 컨트롤러 > 서비스 > 컨트롤러 > 인터셉터 > 필터 > 클라이언트
+
+>>>req.user로 user객체를 얻는 방법이 아닌 바로 user라는 파라미터로 가져올 방법은? 커스텀 데코레이터 이용
+굳이 안쓰고 req로 받아도됨
 
 */

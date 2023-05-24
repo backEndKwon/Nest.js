@@ -4,19 +4,12 @@ import { BoardsService } from './boards.service';
 import { BoardRepository } from './boards.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Board } from './board.entity';
+import {AuthModule} from '../auth/auth.module'
 
 @Module({
   imports: [ 
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '1234',
-      database:"board-app",
-      entities : [__dirname +'/../**/*.entity.{js,ts}'],
-      synchronize : true
-    }),TypeOrmModule.forFeature([Board])],
+  TypeOrmModule.forFeature([Board]),
+AuthModule],
   controllers: [BoardsController],
   providers: [BoardsService, BoardRepository],
 })

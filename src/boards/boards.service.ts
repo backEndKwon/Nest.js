@@ -5,6 +5,7 @@ import { v1 as uuid } from 'uuid';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { Board } from './board.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/user.entity';
 
 @Injectable()
 export class BoardsService {
@@ -66,8 +67,8 @@ async getAllBoards() : Promise<Board[]>{
   //   return found;
   // }
   //>>>게시글 삭제
-  async deleteBoard(id: number): Promise<void> {
-    const result = await this.boardRepository.delete(id);
+  async deleteBoard(id: number, user:User): Promise<void> {
+    const result = await this.boardRepository.delete({id, user:{id:user.id}});
     console.log('result', result); // 결과 값 : DeleteResult {raw:[], affected:1(만약 지울거 없었으면 0)}
     //remove로 하면 에러메세지가 자동으로 뜨지만 에러메세지 cutomized하려면 delete
     if (result.affected === 0) {
